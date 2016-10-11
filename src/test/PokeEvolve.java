@@ -77,9 +77,7 @@ public class PokeEvolve {
 
 
 
-    public static void main(String[] args) {
 
-    }
     /**
      * The toString() prints out all the information about the PokEvolve object. The Pokemon's toString() is printed, along
      * with the output from the pokeName(Pokemon, Pokemon) method.
@@ -90,7 +88,7 @@ public class PokeEvolve {
     public String toString() {
         return "PokEvolve{" +
                 "home=" + home +
-                ", \nvisitor=" + visitor +
+                ", \n\n\nvisitor=" + visitor +
                 ", \n\n\nEvolved Pokemon=" + pokeName(home, visitor) +
                 '}';
     }
