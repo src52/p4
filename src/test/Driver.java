@@ -44,9 +44,9 @@ public class Driver {
         }
 
         PokeEvolve battleOne = new PokeEvolve(initialWinners[randomOpponents[0]], initialWinners[randomOpponents[1]]);
-        Pokemon winner = battleOne.getHome().calculateWinner(battleOne.getVisitor());
+        Pokemon winner = Pokemon.calculateWinner(battleOne.getHome(), battleOne.getVisitor());
         System.out.println(battleOne + "\n\nWinner: " + winner);
-        //battleOne.getVisitor().calculateWinner(battleOne.getHome()).setScores();
+
 
 
 

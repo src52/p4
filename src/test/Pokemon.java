@@ -75,7 +75,6 @@ public class Pokemon {
         return "Pokemon{" +
                 "\nname='" + name + '\'' +
                 ", \nnationalNum=" + nationalNum +
-
                 ", \ngamesPlayed=" + gamesPlayed +
                 ", \ngameAverage=" + gameAverage +
                 ", \nscores=" + Arrays.toString(scores) +
@@ -111,8 +110,8 @@ public class Pokemon {
 
     public int getHash() {
         String newName = (name.substring(0, (name.length() / 2)) + name.substring((name.length() / 2) + 1));
-        if(name.length() % 2 == 0) return name.hashCode();
-        else return newName.hashCode();
+        if(name.length() % 2 == 0) return  Math.abs(name.hashCode());
+        else return  Math.abs(newName.hashCode());
     }
 
     public boolean battle(Pokemon supposedWinner) {
@@ -122,9 +121,35 @@ public class Pokemon {
 
     public Pokemon calculateWinner(Pokemon other) {
         System.out.println("Hash: " + this.getHash() + " (subtract) " + this.calculateAverage() + "\n" + (this.getHash() - this.calculateAverage()) + "\n\nOther: " + other.getHash() + " (subtract) " + other.calculateAverage() + "\n" + (other.getHash() - other.calculateAverage()) + "\n\n");
-        if((this.getHash() - this.calculateAverage()) < (other.getHash() - other.calculateAverage())) return this;
+        double thisNum = Math.abs((this.getHash() - this.calculateAverage()));
+        double otherNum = Math.abs((other.getHash() - other.calculateAverage()));
+        if(thisNum < otherNum) return this;
         else return other;
     }
+
+    public static Pokemon calculateWinner(Pokemon one, Pokemon two) {
+
+        double numOne = Math.abs((one.getHash() - one.calculateAverage()));
+        double numTwo = Math.abs((two.getHash() - two.calculateAverage()));
+        System.out.println(one.getName() + ": " + numOne + "\n" + two.getName() + ": " + numTwo);
+        if(numOne < numTwo) return one;
+        else return two;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * The toString() method prints out all available information about the constructor
