@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b60c1daa-8298-4c42-b44f-37e9ecce96c0" name="Default" comment="" />
+    <list default="true" id="b60c1daa-8298-4c42-b44f-37e9ecce96c0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/rsbot/HelloWorld.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/DialogueGrabber.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/GrabDialogues.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/HelloWorld.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/Idle.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/Option.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/rsbot/Task.class" afterPath="" />
+    </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -160,6 +168,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="out" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -676,12 +698,12 @@
       <workItem from="1476013265966" duration="1055000" />
       <workItem from="1476043498836" duration="14191000" />
       <workItem from="1476060438710" duration="50000" />
-      <workItem from="1476156960759" duration="92000" />
+      <workItem from="1476156960759" duration="176000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15388000" />
+    <option name="totallyTimeSpent" value="15472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
