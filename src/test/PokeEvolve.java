@@ -16,9 +16,8 @@ public class PokeEvolve {
     private Pokemon home;
     private Pokemon visitor;
 
-
     /**
-     * The PokEvolve constructor. Takes two Pokemon objects as parameters.
+     * The PokEvolve overloaded constructor. Takes two Pokemon objects as parameters.
      */
 
     public PokeEvolve(Pokemon home, Pokemon visitor) {
@@ -26,13 +25,16 @@ public class PokeEvolve {
         this.visitor = visitor;
     }
 
+    /**
+     * The PokEvolve no-arg constructor. Takes nothing as parameters.
+     */
     public PokeEvolve() {
         home = new Pokemon();
         visitor = new Pokemon();
     }
 
     /**
-     * Getters and setters0
+     * Getters and setters
      */
 
     public Pokemon getHome() {
@@ -59,10 +61,6 @@ public class PokeEvolve {
      * @param loser The visitor Pokemon
      * @return A merged Pokemon
      */
-    public Pokemon pokeName(Pokemon winner, Pokemon loser) { //@TODO: Insert correct pokeNum() method
-        return new Pokemon(winner.getName().substring(0, 3) + loser.getName().substring(loser.getName().length() - 3), pokeNum(winner.getNationalNum(), loser.getNationalNum()));
-    }
-
     public static Pokemon pokeNameStatic(Pokemon winner, Pokemon loser) { //@TODO: Insert correct pokeNum() method
         return new Pokemon(winner.getName().substring(0, 3) + loser.getName().substring(loser.getName().length() - 3), pokeNumStatic(winner.getNationalNum(), loser.getNationalNum()));
     }
@@ -75,16 +73,9 @@ public class PokeEvolve {
      * @param losingNum The national number of the losing Pokemon.
      * @return The product of the two numbers.
      */
-    private int pokeNum(int winningNum, int losingNum) {
-        return (winningNum * losingNum) + ((int)Math.pow((Math.abs(winningNum - losingNum) - 1), 2))/4;
-    }
-
     private static int pokeNumStatic(int winningNum, int losingNum) {
         return Math.abs((winningNum * losingNum) + ((int)(Math.pow((Math.abs(winningNum - losingNum) - 1), 2))/4));
     }
-
-
-
 
     /**
      * The toString() prints out all the information about the PokEvolve object. The Pokemon's toString() is printed, along

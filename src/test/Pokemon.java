@@ -10,7 +10,7 @@ import java.util.Comparator;
  *
  */
 
-public class Pokemon implements Comparable<Pokemon> {
+public class Pokemon {
 
     /*
      * Instance variables
@@ -31,7 +31,6 @@ public class Pokemon implements Comparable<Pokemon> {
         nationalNum = 0;
     }
 
-
     /**
      * Initializes a complete Pokemon object. This is a full-argument constructor.
      * It passes all the required parameters to fully define a Pokemon object.
@@ -39,11 +38,16 @@ public class Pokemon implements Comparable<Pokemon> {
      * @param name The name of the pokemon
      * @param nationalNum The national number of the pokemon
      */
-    public Pokemon(String name, int nationalNum, int scores[]) {
+    public Pokemon(String name, int nationalNum) {
         this.name = name;
         this.nationalNum = nationalNum;
-        this.scores = scores;
     }
+
+    /**
+     * This method calculates the average score of the Pokemon object based on its other scores.
+     * @return the average
+     */
+
     public double calculateAverage() {
         int sum = 0;
         for (int a = 0; a < scores.length; a++) sum = sum + scores[a];
@@ -51,23 +55,43 @@ public class Pokemon implements Comparable<Pokemon> {
         return average;
     }
 
-    public String[] getWinningScore() {
-        return winningScore;
+    /**
+     * This gets the correct hashCode of the Pokemon based on Professor Nachawati's instructions.
+     * @return the hashCode
+     */
+    public int getHash() {
+        String newName = (name.substring(0, (name.length() / 2)) + name.substring((name.length() / 2) + 1));
+        if(name.length() % 2 == 0) return name.hashCode();
+        else return newName.hashCode();
     }
 
-    public void setWinningScore(String[] winningScore) {
-        this.winningScore = winningScore;
+    /**
+     * Merges the wins (*) or losses (^) to the actual scores, to print them out.
+     * @return The merged score.
+     */
+    public String[] getMergedScores() {
+        String[] newArr = new String[scores.length];
+        for(int a = 0; a < scores.length; a++) {
+            newArr[a] = scores[a] + winningScore[a];
+        }
+        return newArr;
     }
 
-    public static int getN() {
-        return n;
+    /**
+     * Calculates the winner of the battle
+     * @param one One Pokemon
+     * @param two The other Pokemon
+     * @return An array that indicates the proper winner and loser.
+     */
+    public static Pokemon[] calculateWinner(Pokemon one, Pokemon two) {
+        Pokemon[] oneWins = {one, two};
+        Pokemon[] twoWins = {two, one};
+        double numOne = Math.abs((one.getHash() - one.calculateAverage()));
+        double numTwo = Math.abs((two.getHash() - two.calculateAverage()));
+
+        if(numOne < numTwo) return oneWins;
+        else return twoWins;
     }
-
-    public static void setN(int n) {
-        Pokemon.n = n;
-    }
-
-
 
     /**
      * The toString() method prints out all available information about the constructor
@@ -83,11 +107,6 @@ public class Pokemon implements Comparable<Pokemon> {
                 ", winningScores" + Arrays.toString(winningScore) +
                 ", hash=" + name.hashCode() +
                 '}';
-    }
-
-    public Pokemon(String name, int nationalNum) {
-        this.name = name;
-        this.nationalNum = nationalNum;
     }
 
     /**
@@ -114,49 +133,6 @@ public class Pokemon implements Comparable<Pokemon> {
         gamesPlayed++;
     }
 
-    public int getHash() {
-        String newName = (name.substring(0, (name.length() / 2)) + name.substring((name.length() / 2) + 1));
-        if(name.length() % 2 == 0) return name.hashCode();
-        else return newName.hashCode();
-    }
-
-    public boolean battle(Pokemon supposedWinner) {
-        //if(supposedWinner.getHash() - supposedWinner.getNationalNum())
-        return false;
-    }
-
-    public Pokemon calculateWinner(Pokemon other) {
-        System.out.println("Hash: " + this.getHash() + " (subtract) " + this.calculateAverage() + "\n" + (this.getHash() - this.calculateAverage()) + "\n\nOther: " + other.getHash() + " (subtract) " + other.calculateAverage() + "\n" + (other.getHash() - other.calculateAverage()) + "\n\n");
-        if((this.getHash() - this.calculateAverage()) < (other.getHash() - other.calculateAverage())) return this;
-        else return other;
-    }
-
-    public String[] getMergedScores() {
-        String[] newArr = new String[scores.length];
-        for(int a = 0; a < scores.length; a++) {
-            newArr[a] = scores[a] + winningScore[a];
-        }
-        return newArr;
-    }
-
-    public static Pokemon[] calculateWinner(Pokemon one, Pokemon two) {
-        Pokemon[] oneWins = {one, two};
-        Pokemon[] twoWins = {two, one};
-        double numOne = Math.abs((one.getHash() - one.calculateAverage()));
-        double numTwo = Math.abs((two.getHash() - two.calculateAverage()));
-
-        if(numOne < numTwo) return oneWins;
-        else return twoWins;
-    }
-
-    /**
-     * The toString() method prints out all available information about the constructor
-     */
-    //@Override
-    //public String toString() {
-     //   return "\n__________\nName: " + name + "\nNumber: " + nationalNum + "\n_________";
-   // }
-
     public int getGamesPlayed() {
         return gamesPlayed;
     }
@@ -181,16 +157,20 @@ public class Pokemon implements Comparable<Pokemon> {
         this.scores = scores;
     }
 
-    public static Comparator<Pokemon> PokemonNameComparator
-            = (pokemonOne, pokemonTwo) -> {
-
-        if(pokemonOne.getName().compareTo(pokemonTwo.getName()) > 0) return -1;
-        else if(pokemonTwo.getName().compareTo(pokemonOne.getName()) < 0) return 1;
-        else return 0;
-            };
-
-    @Override
-    public int compareTo(Pokemon o) {
-        return 0;
+    public String[] getWinningScore() {
+        return winningScore;
     }
+
+    public void setWinningScore(String[] winningScore) {
+        this.winningScore = winningScore;
+    }
+
+    public static int getN() {
+        return n;
+    }
+
+    public static void setN(int n) {
+        Pokemon.n = n;
+    }
+
 }

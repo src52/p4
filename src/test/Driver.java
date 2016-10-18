@@ -28,6 +28,10 @@ public class Driver {
     Random rand = new Random();
     public Pokemon[] initialWinners = new Pokemon[100];
 
+    /**
+     * Initializes the Driver object, and starts the Pokemon game.
+     * @param args run-time arguments, not used
+     */
     public static void main(String[] args) {
         Driver instance = new Driver();
         instance.rand.setSeed(System.currentTimeMillis());
@@ -35,6 +39,10 @@ public class Driver {
         System.out.println("Initialized initial pokemon");
         instance.battle();
     }
+
+    /**
+     * The initializeFoundingPokemon() method generates the inital predefined Pokemon objects.
+     */
 
     public void initializeFoundingPokemon() {
         rand.setSeed(System.currentTimeMillis());
@@ -62,6 +70,10 @@ public class Driver {
         initialWinners[3] = four;
         initialWinners[4] = five;
     }
+
+    /**
+     * The battle() method handles all the Pokemon battles
+     */
 
     public void battle() {
         Scanner scan = new Scanner(System.in);
@@ -114,12 +126,8 @@ public class Driver {
                 losersScore = 50 - winnersScore;
             }
 
-
             winner.incrementGamesPlayed();
             loser.incrementGamesPlayed();
-
-            //System.out.println(Arrays.toString(winner.getScores()) + "\n\n\n\n");
-
 
             winner.setScores(ArrayUtils.add(winner.getScores(), winnersScore));
             winner.setWinningScore(ArrayUtils.add(winner.getWinningScore(), "*"));
@@ -146,10 +154,23 @@ public class Driver {
         battle();
     }
 
+    /**
+     * Generates a random number from 0 to range
+     * @param range
+     * @return
+     */
     public int randomScore(int range) {
         return rand.nextInt(range);
     }
 
+    /**
+     * Gets the real length of the Pokemon array, without all the nulled entries.
+     *
+     * This is "n" from the assignment.
+     *
+     * @param array the array
+     * @return the real, no nulls, length of the array
+     */
     public static int getRealLength(Pokemon[] array) {
         int num = 0;
         for(int a = 0; a < array.length; a++) {
@@ -163,20 +184,26 @@ public class Driver {
     }
 
 
+    /**
+     * Prints the Pokemon objects onto a neat table. I am using the third-party library, "ASCIITable" to generate these
+     * tables. The project is located here: https://github.com/vdmeer/asciitable
+     *
+     * The project is licensed under Apache 2.0 Licensing.
+     *
+     * @param arr the pokemon array
+     * @param randomOpponents the random opponent choices
+     * @param type which type of printing will be done
+     * @return the table in a String format.
+     */
     public static String printTable(Pokemon[] arr, int[] randomOpponents, String type) {
         Pokemon[] sortedByName = arr;
-
-        Arrays.sort(sortedByName, 0, getRealLength(sortedByName), Pokemon.PokemonNameComparator);
-
-
-        System.out.println(Arrays.toString(sortedByName));
         V2_AsciiTable at = new V2_AsciiTable();
         at.addRule();
         at.addRow("Name", "National Number", "Games played", "Average", "Scores", "Hash");
         at.addRule();
         for(int a = 0; a < arr.length; a++) {
             if(arr[a] == null) break;
-            if(type == "name") {
+            if(type == "name") { //I didn't get this feature working
                 System.out.println("test");
                 at.addRow((a + 1) + ": " + sortedByName[a].getName(), sortedByName[a].getNationalNum(), sortedByName[a].getGamesPlayed(), sortedByName[a].getGameAverage(), Arrays.toString(sortedByName[a].getMergedScores()), sortedByName[a].getHash());
                 at.addRule();
@@ -196,6 +223,16 @@ public class Driver {
         return rt.toString();
     }
 
+    /**
+     * Generates a random integer within the bounds of aStart and aEnd.
+     *
+     * I did not create this method, it was provided to me by Professor Nachawati on her BeachBoard page.
+     *
+     * @param aStart Beginning of range
+     * @param aEnd End of range
+     * @param aRandom the Random object to generate the number
+     * @return a random number
+     */
     private static int showRandomInteger(int aStart, int aEnd, Random aRandom){
 
         if ( aStart > aEnd ) {
@@ -207,25 +244,5 @@ public class Driver {
         long fraction = (long)(range * aRandom.nextDouble());
         int randomNumber = (int)(fraction + aStart);
         return randomNumber;
-    }
-
-    public static void sortByName(Pokemon[] arr) {
-        int i,j;
-        Pokemon key;
-        System.out.println(Arrays.toString(arr));
-        for (j = 1; j < getRealLength(arr); j++) { //the condition has changed
-            key = arr[j];
-            i = j - 1;
-            while (i >= 0) {
-                if (key.getName().compareTo(arr[i].getName()) > 0) {//here too
-                    break;
-                }
-                arr[i + 1] = arr[i];
-                i--;
-            }
-            arr[i + 1] = key;
-            System.out.println(Arrays.toString(arr));
-        }
-        System.out.println(Arrays.toString(arr));
     }
 }
