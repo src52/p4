@@ -99,6 +99,7 @@ public class Pokemon {
     @Override
     public String toString() {
         return "Pokemon{" +
+<<<<<<< HEAD
                 "name='" + name + '\'' +
                 ", nationalNum=" + nationalNum +
                 ", gamesPlayed=" + gamesPlayed +
@@ -106,6 +107,15 @@ public class Pokemon {
                 ", scores=" + Arrays.toString(scores) +
                 ", winningScores" + Arrays.toString(winningScore) +
                 ", hash=" + name.hashCode() +
+=======
+                "\nname='" + name + '\'' +
+                ", \nnationalNum=" + nationalNum +
+                ", \ngamesPlayed=" + gamesPlayed +
+                ", \ngameAverage=" + gameAverage +
+                ", \nscores=" + Arrays.toString(scores) +
+                ", \nwinningScores" + Arrays.toString(winningScore) +
+                ", \nhash=" + name.hashCode() +
+>>>>>>> 86826b92b479100d10756a43e5f69d3b52dd3004
                 '}';
     }
 
@@ -129,10 +139,64 @@ public class Pokemon {
         this.nationalNum = nationalNum;
     }
 
+<<<<<<< HEAD
     public void incrementGamesPlayed() {
         gamesPlayed++;
     }
 
+=======
+    public int getHash() {
+        String newName = (name.substring(0, (name.length() / 2)) + name.substring((name.length() / 2) + 1));
+        if(name.length() % 2 == 0) return  Math.abs(name.hashCode());
+        else return  Math.abs(newName.hashCode());
+    }
+
+    public boolean battle(Pokemon supposedWinner) {
+        //if(supposedWinner.getHash() - supposedWinner.getNationalNum())
+        return false;
+    }
+
+    public Pokemon calculateWinner(Pokemon other) {
+        System.out.println("Hash: " + this.getHash() + " (subtract) " + this.calculateAverage() + "\n" + (this.getHash() - this.calculateAverage()) + "\n\nOther: " + other.getHash() + " (subtract) " + other.calculateAverage() + "\n" + (other.getHash() - other.calculateAverage()) + "\n\n");
+        double thisNum = Math.abs((this.getHash() - this.calculateAverage()));
+        double otherNum = Math.abs((other.getHash() - other.calculateAverage()));
+        if(thisNum < otherNum) return this;
+        else return other;
+    }
+
+    public static Pokemon calculateWinner(Pokemon one, Pokemon two) {
+
+        double numOne = Math.abs((one.getHash() - one.calculateAverage()));
+        double numTwo = Math.abs((two.getHash() - two.calculateAverage()));
+        System.out.println(one.getName() + ": " + numOne + "\n" + two.getName() + ": " + numTwo);
+        if(numOne < numTwo) return one;
+        else return two;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * The toString() method prints out all available information about the constructor
+     */
+    //@Override
+    //public String toString() {
+     //   return "\n__________\nName: " + name + "\nNumber: " + nationalNum + "\n_________";
+   // }
+
+>>>>>>> 86826b92b479100d10756a43e5f69d3b52dd3004
     public int getGamesPlayed() {
         return gamesPlayed;
     }

@@ -126,8 +126,15 @@ public class Driver {
                 losersScore = 50 - winnersScore;
             }
 
+<<<<<<< HEAD
             winner.incrementGamesPlayed();
             loser.incrementGamesPlayed();
+=======
+        PokeEvolve battleOne = new PokeEvolve(initialWinners[randomOpponents[0]], initialWinners[randomOpponents[1]]);
+        Pokemon winner = Pokemon.calculateWinner(battleOne.getHome(), battleOne.getVisitor());
+        System.out.println(battleOne + "\n\nWinner: " + winner);
+
+>>>>>>> 86826b92b479100d10756a43e5f69d3b52dd3004
 
             winner.setScores(ArrayUtils.add(winner.getScores(), winnersScore));
             winner.setWinningScore(ArrayUtils.add(winner.getWinningScore(), "*"));
