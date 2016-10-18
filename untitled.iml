@@ -10,5 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="RSBot-7035" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" name="asciitable-0.0.6" level="project" />
   </component>
 </module>

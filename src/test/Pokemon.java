@@ -1,6 +1,7 @@
 package test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * The Pokemon class is a class that initializes a Pokemon object, which consists of a name and a number.
@@ -9,7 +10,7 @@ import java.util.Arrays;
  *
  */
 
-public class Pokemon {
+public class Pokemon implements Comparable<Pokemon> {
 
     /*
      * Instance variables
@@ -43,7 +44,6 @@ public class Pokemon {
         this.nationalNum = nationalNum;
         this.scores = scores;
     }
-
     public double calculateAverage() {
         int sum = 0;
         for (int a = 0; a < scores.length; a++) sum = sum + scores[a];
@@ -67,20 +67,21 @@ public class Pokemon {
         Pokemon.n = n;
     }
 
+
+
     /**
      * The toString() method prints out all available information about the constructor
      */
     @Override
     public String toString() {
         return "Pokemon{" +
-                "\nname='" + name + '\'' +
-                ", \nnationalNum=" + nationalNum +
-
-                ", \ngamesPlayed=" + gamesPlayed +
-                ", \ngameAverage=" + gameAverage +
-                ", \nscores=" + Arrays.toString(scores) +
-                ", \nwinningScores" + Arrays.toString(winningScore) +
-                ", \nhash=" + name.hashCode() +
+                "name='" + name + '\'' +
+                ", nationalNum=" + nationalNum +
+                ", gamesPlayed=" + gamesPlayed +
+                ", gameAverage=" + gameAverage +
+                ", scores=" + Arrays.toString(scores) +
+                ", winningScores" + Arrays.toString(winningScore) +
+                ", hash=" + name.hashCode() +
                 '}';
     }
 
@@ -109,6 +110,10 @@ public class Pokemon {
         this.nationalNum = nationalNum;
     }
 
+    public void incrementGamesPlayed() {
+        gamesPlayed++;
+    }
+
     public int getHash() {
         String newName = (name.substring(0, (name.length() / 2)) + name.substring((name.length() / 2) + 1));
         if(name.length() % 2 == 0) return name.hashCode();
@@ -124,6 +129,24 @@ public class Pokemon {
         System.out.println("Hash: " + this.getHash() + " (subtract) " + this.calculateAverage() + "\n" + (this.getHash() - this.calculateAverage()) + "\n\nOther: " + other.getHash() + " (subtract) " + other.calculateAverage() + "\n" + (other.getHash() - other.calculateAverage()) + "\n\n");
         if((this.getHash() - this.calculateAverage()) < (other.getHash() - other.calculateAverage())) return this;
         else return other;
+    }
+
+    public String[] getMergedScores() {
+        String[] newArr = new String[scores.length];
+        for(int a = 0; a < scores.length; a++) {
+            newArr[a] = scores[a] + winningScore[a];
+        }
+        return newArr;
+    }
+
+    public static Pokemon[] calculateWinner(Pokemon one, Pokemon two) {
+        Pokemon[] oneWins = {one, two};
+        Pokemon[] twoWins = {two, one};
+        double numOne = Math.abs((one.getHash() - one.calculateAverage()));
+        double numTwo = Math.abs((two.getHash() - two.calculateAverage()));
+
+        if(numOne < numTwo) return oneWins;
+        else return twoWins;
     }
 
     /**
@@ -156,5 +179,18 @@ public class Pokemon {
 
     public void setScores(int[] scores) {
         this.scores = scores;
+    }
+
+    public static Comparator<Pokemon> PokemonNameComparator
+            = (pokemonOne, pokemonTwo) -> {
+
+        if(pokemonOne.getName().compareTo(pokemonTwo.getName()) > 0) return -1;
+        else if(pokemonTwo.getName().compareTo(pokemonOne.getName()) < 0) return 1;
+        else return 0;
+            };
+
+    @Override
+    public int compareTo(Pokemon o) {
+        return 0;
     }
 }

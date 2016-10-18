@@ -60,7 +60,11 @@ public class PokeEvolve {
      * @return A merged Pokemon
      */
     public Pokemon pokeName(Pokemon winner, Pokemon loser) { //@TODO: Insert correct pokeNum() method
-        return new Pokemon(winner.getName().substring(0, 3) + loser.getName().substring(visitor.getName().length() - 3), pokeNum(winner.getNationalNum(), loser.getNationalNum()));
+        return new Pokemon(winner.getName().substring(0, 3) + loser.getName().substring(loser.getName().length() - 3), pokeNum(winner.getNationalNum(), loser.getNationalNum()));
+    }
+
+    public static Pokemon pokeNameStatic(Pokemon winner, Pokemon loser) { //@TODO: Insert correct pokeNum() method
+        return new Pokemon(winner.getName().substring(0, 3) + loser.getName().substring(loser.getName().length() - 3), pokeNumStatic(winner.getNationalNum(), loser.getNationalNum()));
     }
 
     /**
@@ -73,6 +77,10 @@ public class PokeEvolve {
      */
     private int pokeNum(int winningNum, int losingNum) {
         return (winningNum * losingNum) + ((int)Math.pow((Math.abs(winningNum - losingNum) - 1), 2))/4;
+    }
+
+    private static int pokeNumStatic(int winningNum, int losingNum) {
+        return Math.abs((winningNum * losingNum) + ((int)(Math.pow((Math.abs(winningNum - losingNum) - 1), 2))/4));
     }
 
 
@@ -89,7 +97,6 @@ public class PokeEvolve {
         return "PokEvolve{" +
                 "home=" + home +
                 ", \n\n\nvisitor=" + visitor +
-                ", \n\n\nEvolved Pokemon=" + pokeName(home, visitor) +
                 '}';
     }
 }
